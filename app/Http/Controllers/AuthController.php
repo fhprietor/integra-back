@@ -22,6 +22,17 @@ use Illuminate\Validation\Rules\Password;
  */
 class AuthController extends Controller
 {
+    public function refresh(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        $token = $request->user()->createToken('main')->plainTextToken;
+
+        return response([
+            'user' => $request->user(),
+            'token' => $token
+        ]);
+    }
+
     public function register(Request $request)
     {
         $data = $request->validate([
@@ -65,8 +76,8 @@ class AuthController extends Controller
                 'error' => 'The Provided credentials are not correct'
             ], 422);
         }
-        $user = Auth::user();
-        $token = $user->createToken('main')->plainTextToken;
+            $user = Auth::user();
+            $token = $user->createToken('main')->plainTextToken;
 
         return response([
             'user' => $user,
