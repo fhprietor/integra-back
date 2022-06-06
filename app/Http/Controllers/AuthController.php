@@ -9,7 +9,10 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+
+
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Validation\Rules\Password;
@@ -22,7 +25,7 @@ use Illuminate\Validation\Rules\Password;
  */
 class AuthController extends Controller
 {
-    public function refresh(Request $request)
+    public function refresh(Request $request): Response
     {
         $request->user()->tokens()->delete();
         $token = $request->user()->createToken('main')->plainTextToken;
@@ -33,7 +36,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public function register(Request $request): Response
     {
         $data = $request->validate([
             'name' => 'required|string',
@@ -59,7 +62,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function login(Request $request): Response
     {
         $credentials = $request->validate([
             'email' => 'required|email|string|exists:users,email',
@@ -85,7 +88,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(): Response
     {
         /** @var User $user */
         $user = Auth::user();

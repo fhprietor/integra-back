@@ -6,11 +6,12 @@ use App\Models\ApplicationLog;
 use App\Models\Operation;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
-    public function overview()
+    public function overview(): Response
     {
         $salesCountLastYear = salesCount(
             Carbon::now()->subYear(1)->startOfMonth(),
