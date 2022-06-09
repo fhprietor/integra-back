@@ -15,6 +15,7 @@ class Customer extends Model
     protected $table = 'tblcli';
     protected $primaryKey = 'idecli';
     protected $keyType = 'string';
+    public $incrementing = false;
 
     public function person(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
