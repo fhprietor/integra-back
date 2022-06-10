@@ -59,13 +59,23 @@ class CustomerController extends Controller
                     ->paginate($perPage);
             }
         } else {
-            $customers = Customer::joinRelations('person','loans')
-                ->where('salcli','>',0)
-                ->orderBy('fuccli','desc')
-                ->withSum('loans','saldo')
-                ->with(['person','zone'])
-                ->withLastSale()
-                ->paginate($perPage);
+            if (request('filterByName')) {
+                $customers = Customer::joinRelations('person', 'loans')
+                    ->where('tbltrc.nombre', 'ilike', '%'.request('filterByName').'%')
+                    ->orderBy('fuccli', 'desc')
+                    ->withSum('loans', 'saldo')
+                    ->with(['person', 'zone'])
+                    ->withLastSale()
+                    ->paginate($perPage);
+            } else {
+                $customers = Customer::joinRelations('person', 'loans')
+                    ->where('salcli', '>', 0)
+                    ->orderBy('fuccli', 'desc')
+                    ->withSum('loans', 'saldo')
+                    ->with(['person', 'zone'])
+                    ->withLastSale()
+                    ->paginate($perPage);
+            }
             /*
             $customers = Customer::where('salcli','>',0)
                 ->with('person','loans')
