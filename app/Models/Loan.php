@@ -17,4 +17,7 @@ class Loan extends Model
         return $this->belongsTo(Customer::class,'idecli', 'idecli');
     }
 
+    public function numeration() {
+        return $this->belongsTo(Numeration::class,'idecbt','idecbt');
+    }
 }

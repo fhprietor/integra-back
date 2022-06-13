@@ -15,7 +15,7 @@ class CustomerController extends Controller
             $customer = Customer::where('idecli','=',$id)
                 ->withSum('loans','saldo')
                 ->withSum('sales','vrtotal')
-                ->with(['person','zone','loans'])
+                ->with(['person','zone','loans','loans.numeration','installments','phones','phones.site'])
                 ->first();
 
             return $customer;

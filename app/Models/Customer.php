@@ -21,6 +21,13 @@ class Customer extends Model
     {
         return $this->belongsTo(Person::class,'idecli', 'idetrc');
     }
+
+    public function phones(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Phone::class,'idttel','idecli')
+            ->where('esttel','=','1');
+    }
+
     public function zone(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Zone::class,'zonaid', 'id');
@@ -31,7 +38,7 @@ class Customer extends Model
         return $this->belongsTo(Operation::class);
     }
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Operation::class,'idetrc','idecli')
             ->where('tipooperacion','=',1);
@@ -39,6 +46,12 @@ class Customer extends Model
     public function loans(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Loan::class,'idecli','idecli')->where('saldo','>',0);
+    }
+
+    public function installments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Installment::class,'idecli','idecli')
+            ->where('estado','=','1');
     }
 /*
     public function loanBalance()
@@ -85,7 +98,7 @@ class Customer extends Model
             ->sum('vrtotal');
 
         $query->addSelect([
-            'last_sale_id' => $subselect,
+            'salesTotal' => $subselect,
         ]);
 
       //  $query->with('lastSale');
