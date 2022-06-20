@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customer\Tracking;
+use App\Models\Customer\Tracking;
 
 class CustomerTrackingController extends Controller
 {

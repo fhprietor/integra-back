@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\customer;
+namespace App\Models\Customer;
 
 use App\Models\Loan;
 use App\Models\loan\History;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customer\Customer;
+use App\Models\Customer\Customer;
 use App\Models\loan\History;
 
 class CustomerController extends Controller
