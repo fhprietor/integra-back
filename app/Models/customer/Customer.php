@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\customer;
 
+use App\Models\Loan;
+use App\Models\loan\History;
+use App\Models\loan\Installment;
+use App\Models\Operation;
+use App\Models\Person;
+use App\Models\Phone;
+use App\Models\Zone;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function request;
 
 class Customer extends Model
 {
@@ -20,6 +28,11 @@ class Customer extends Model
     public function person(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Person::class,'idecli', 'idetrc');
+    }
+
+    public function creditHistories()
+    {
+        return $this->hasMany(History::class,'idecli','idecli');
     }
 
     public function phones(): \Illuminate\Database\Eloquent\Relations\HasMany

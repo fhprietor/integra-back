@@ -9,4 +9,8 @@ class Numeration extends Model
 {
     use HasFactory;
     protected $table = 'tblcbt';
+
+    public function type() {
+        return $this->hasOne(NumerationType::class,'tipocbt','tipocbt');
+    }
 }

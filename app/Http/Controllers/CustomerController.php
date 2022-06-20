@@ -2,13 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
+use App\Models\customer\Customer;
+use App\Models\loan\History;
 
 class CustomerController extends Controller
 {
+    public function loanHistory($id) {
+        if ($id) {
+            $perPage = 15;
+            if (request('perPage')) {
+                $perPage = (int)request('perPage');
+            }
+            $id = (string)request('id');
+            return History::where('idecli','=',$id)
+                ->orderBy('fecha')
+                ->orderBy('ide')
+                ->with('numeration','numeration.type')
+            ->paginate($perPage);
+        }
+        return null;
+    }
     public function show() {
         if (request('id')) {
             $id = (string)request('id');

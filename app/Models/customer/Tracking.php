@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\customer;
 
+use App\Models\Person;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,7 @@ class Tracking extends Model
 {
     use HasFactory;
     protected $table = 'Seguimiento';
+    protected $primaryKey = 'ideSeg';
     public function customer()
     {
         return $this->belongsTo(Person::class, 'idecli', 'idetrc');

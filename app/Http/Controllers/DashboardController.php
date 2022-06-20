@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ApplicationLog;
 use App\Models\Operation;
-use App\Models\Tracking;
+use App\Models\Customer\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
