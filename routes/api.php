@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerTrackingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OperationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,11 +36,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/overview', [DashboardController::class, 'overview']);
     Route::get('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/customers', [CustomerController::class, 'index']);
+    Route::get('/customer', [CustomerController::class, 'show']);
+    Route::get('/customer/{id}/tracking',[CustomerTrackingController::class,'index']);
+    Route::get('/customer/{id}/loanHistory',[CustomerController::class,'loanHistory']);
+    Route::get('/customer/{id}/salesByCustomer',[OperationController::class,'salesByCustomer']);
+
 });
-Route::get('/customers', [CustomerController::class, 'index']);
-Route::get('/customer', [CustomerController::class, 'show']);
-Route::get('/customer/{id}/tracking',[CustomerTrackingController::class,'index']);
-Route::get('/customer/{id}/loanHistory',[CustomerController::class,'loanHistory']);
 
 //Route::get('/survey-by-slug/{survey:slug}', [\App\Http\Controllers\SurveyController::class, 'showForGuest']);
 //Route::post('/survey/{survey}/answer', [\App\Http\Controllers\SurveyController::class, 'storeAnswer']);
